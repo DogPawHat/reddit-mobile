@@ -38,7 +38,7 @@ class BetaBanner extends React.Component {
               <span aria-hidden='true'>&times;</span>
             </button>
 
-            <h1>Welcome to reddit's new mobile site</h1>
+            <h1>Welcome to reddit's new mobile site ON STAGING</h1>
             <p>
               This is in beta, so some features are missing and some stuff is
               broken. Thanks for trying it out! <a href='/faq'>Learn more.</a>
