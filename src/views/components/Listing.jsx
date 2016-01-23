@@ -136,16 +136,15 @@ class Listing extends BaseComponent {
       );
     }
     
-    if(this.state.archived){
+    if (this.state.archived) {
         //TODO: figure out color for label; intergrate into css
-        var archivedStyle = {backgroundColor: "#FFD82B"};
         
-        var archivedNode = (
-            <span className='Listing-link-flair label label-warning' style={archivedStyle}>
+      var archivedNode = (
+            <span className='Listing-link-flair label label-warning'>
               <span className="glyphicon glyphicon-lock"></span>
               &nbsp;Archived
             </span>
-        );
+       );
     }
 
     let linkNode;

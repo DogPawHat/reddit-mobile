@@ -14,12 +14,13 @@ class Vote extends BaseComponent {
       propTypes.listing,
     ]).isRequired,
   };
-
+  
   constructor(props) {
     super(props);
 
     this.state = {
       score: props.thing.score,
+      archived: props.thing.archived
     };
 
     const likes = props.thing.likes;
@@ -91,6 +92,15 @@ class Vote extends BaseComponent {
 
   submitVote(direction) {
     if (this.props.app.needsToLogInUser()) { return; }
+    
+    if (this.state.archived) {
+        return;
+    }  
+    
+    if (!this.props.token) {
+      window.location = this.props.app.config.loginPath;
+      return;
+    }
 
     if (this.state.localScore === direction) {
       direction = 0;
