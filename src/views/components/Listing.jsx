@@ -48,6 +48,7 @@ class Listing extends BaseComponent {
       compact,
       expanded: false,
       showNSFW: !props.showOver18Interstitial && props.subredditIsNSFW,
+      archived: props.listing.archived,
       loaded: false,
       tallestHeight: 0,
       reported: props.listing.reported,
@@ -134,6 +135,18 @@ class Listing extends BaseComponent {
         </span>
       );
     }
+    
+    if(this.state.archived){
+        //TODO: figure out color for label; intergrate into css
+        var archivedStyle = {backgroundColor: "#FFD82B"};
+        
+        var archivedNode = (
+            <span className='Listing-link-flair label label-warning' style={archivedStyle}>
+              <span className="glyphicon glyphicon-lock"></span>
+              &nbsp;Archived
+            </span>
+        );
+    }
 
     let linkNode;
 
@@ -149,11 +162,12 @@ class Listing extends BaseComponent {
 
     let flairNode;
 
-    if (nsfwNode || linkNode) {
+    if (nsfwNode || linkNode || archivedNode) {
       flairNode = (
         <div className='Listing-flair link-flair-container vertical-spacing-top'>
           { nsfwNode }
           { linkNode }
+          { archivedNode }
         </div>
       );
     }
