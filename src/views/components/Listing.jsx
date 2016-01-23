@@ -48,11 +48,11 @@ class Listing extends BaseComponent {
       compact,
       expanded: false,
       showNSFW: !props.showOver18Interstitial && props.subredditIsNSFW,
-      archived: props.listing.archived,
       loaded: false,
       tallestHeight: 0,
       reported: props.listing.reported,
       hidden: props.listing.hidden,
+      showLocked: props.listing.archived || props.listing.locked,
       width: (props.winWidth || 300) - 10,
     };
 
@@ -135,17 +135,6 @@ class Listing extends BaseComponent {
         </span>
       );
     }
-    
-    if (this.state.archived) {
-        //TODO: figure out color for label; intergrate into css
-        
-      var archivedNode = (
-            <span className='Listing-link-flair label label-warning'>
-              <span className="glyphicon glyphicon-lock"></span>
-              &nbsp;Archived
-            </span>
-       );
-    }
 
     let linkNode;
 
@@ -161,12 +150,11 @@ class Listing extends BaseComponent {
 
     let flairNode;
 
-    if (nsfwNode || linkNode || archivedNode) {
+    if (nsfwNode || linkNode) {
       flairNode = (
         <div className='Listing-flair link-flair-container vertical-spacing-top'>
           { nsfwNode }
           { linkNode }
-          { archivedNode }
         </div>
       );
     }
@@ -198,7 +186,7 @@ class Listing extends BaseComponent {
     if (subredditNode || flairNode) {
       row1Node = (
         <div className='Listing-header-row1'>
-          { listing.locked
+          { this.state.showLocked
             ? <div className='Listing-lock icon-lock'/>
             : null }
           { subredditNode }
@@ -307,7 +295,7 @@ class Listing extends BaseComponent {
     return (
       <footer className='Listing-footer'>
         <ul className='linkbar text-muted'>
-          { !hasFlair && listing.locked
+          { !hasFlair && this.state.showLocked
             ? <div className='Listing-lock-large listing-footer-icon icon-lock'/>
             : null }
           { commentsNode }
