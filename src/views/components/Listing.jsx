@@ -339,6 +339,18 @@ class Listing extends BaseComponent {
     if ((!showHidden && hidden) || reported) {
       return null;
     }
+    
+    var archivedFootnote;
+    if (listing.archived) {
+      var rightAlignStyle = { textAlign: 'right'};  
+      
+      
+      archivedFootnote = (
+          <div style={ rightAlignStyle }>
+                Comments and voting have been disabled
+          </div>
+      );
+    }
 
     let expandedCompact;
     if (compact && expanded && !single) {
@@ -391,6 +403,7 @@ class Listing extends BaseComponent {
           { this._renderFooter() }
         </div>
         { expandedCompact }
+        { archivedFootnote }
       </article>
     );
   }
